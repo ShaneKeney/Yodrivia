@@ -102,6 +102,9 @@ function triviaDB (){
                     $("#btn-col-"+l).append("<label class='btn btn-primary' id='btn-option-"+l+m+"'>");
                     $("#btn-option-"+l+m).append("<input type='radio' name='options' value='"+answersArr[m]+"' id='option'"+m+">"+answersArr[m]);
                 }
+            var bodyFrontHeight = ($("#card-body-front"+l).height());
+            console.log(bodyFrontHeight);
+            $("#card-front"+l).attr("style",bodyFrontHeight+10+"px !important");
             $("#card-question"+l).append("<div class='back' id='card-back"+l+"'>");
             $("#card-back"+l).append("<div class='card-body' id='card-body-back"+l+"'>");
             $("#card-back"+l).append("<h3 class='card-title text-center' id='card-title-back"+l+"'>Question "+(l+1)+"<hr>");
