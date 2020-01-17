@@ -71,6 +71,29 @@ function flipcard (){
     });
 };
 
+
+//Question categore options
+
+var questionCatetory = {
+    "General Knowledge": "9",
+    "Sports":  "21",
+    "Politics": "24"
+  };
+
+
+  var category= $('#categorySelect');
+  //
+  $.each(questionCatetory, function(key, value) {
+    var $option = $("<option/>", {
+      text: key,
+      value: value
+    });
+    category.append($option);
+  });
+
+
+
+
 //funtion to call Trivia DB
 function triviaDB (){
     var numOfQuestion = 10;
@@ -80,6 +103,7 @@ function triviaDB (){
         url: triviaURL,
         method: "GET"
         }).then(function(response){
+
         //cardQuestionsContainer.empty();
         for(l=0;l<response.results.length;l++){
             var cardQuestionsContainer = $("#card-questions-container");
@@ -112,6 +136,38 @@ function triviaDB (){
             $("#card-back"+l).append("<hr>");
             $("#card-back"+l).append("<h4>"+response.results[l].correct_answer);
             flipcard();                 
+=======
+
+console.log(response);
+    
+        // looping through the response stored in "response function"
+        for (i=0; i<1; i++){
+            //defining variable and storing a question to the variable
+            var question = response.results[i].question;
+            var answersArr = [];
+            
+            //looping through the answers and stroing into "answersArr"
+                for(j=0; j<3; j++){
+                    var option = response.results[i].incorrect_answers[j];
+                    if (option != undefined) {
+                        answersArr.push(option);                    
+                    } 
+                }
+            // storing correct answer into answersArr and shuffling it to place answer randomly into the arra
+            var correctAns = response.results[i].correct_answer;
+            answersArr.push(correctAns);
+            console.log(answersArr);
+            if (answersArr.length == 2){
+                answersArr.sort();
+                answersArr.reverse();
+                console.log(answersArr);
+            
+            }else{
+                answersArr.sort(function(a,b){return 0.5-Math.random()});
+                console.log(answersArr);            
+            }
+
+
         }
 
     });       
