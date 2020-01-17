@@ -90,43 +90,18 @@ function triviaDB (){
             $("#card-body-front"+l).append("<p class='text-center'>" + response.results[l].question);
             $("#card-body-front"+l).append("<div class='row justify-content-center' id='btn-row-"+l+"'>");
             $("#btn-row-"+l).append("<div class='col-12 d-flex justify-content-center btn-toolbar btn-group-toggle' id='btn-col-"+l+"' data-toggle='buttons'>");
-            if(response.results[l].type === "multiple"){
-                 for(m=0;m<4;m++){
-                    //defining variable and storing a question to the variable
-                    var answersArr = []; //Mira command
-                    //storing correct answer into answersArr
-                    var correctAns = response.results[l].correct_answer; //Mira command
-                    answersArr.push(correctAns); //Mira command
-                    //looping through the answers and stroing into "answersArr"
-                        for(j=0; j<response.results[l].incorrect_answers.length; j++){ //Mira command
-                        var option = response.results[l].incorrect_answers[j]; //Mira command
-                        if (option != undefined) { //Mira command
-                            answersArr.push(option);  //Mira command                   
-                            } 
-                        }
- //FIXX THIS  >>>>>>//answersArr.sort(() => Math.random()-0.5);
+            var answersArr = []; //Mira command
+            var correctAns = response.results[l].correct_answer; //Mira command
+            answersArr.push(correctAns); //Mira command
+            for(j=0; j<response.results[l].incorrect_answers.length; j++){ //Mira command
+                    var option = response.results[l].incorrect_answers[j]; //Mira command
+                    answersArr.push(option);  //Mira command                   
+                } 
+                    answersArr.sort(function(a,b){return 0.5-Math.random()});
+                for(m=0;m<answersArr.length;m++){
                     $("#btn-col-"+l).append("<label class='btn btn-primary' id='btn-option-"+l+m+"'>");
                     $("#btn-option-"+l+m).append("<input type='radio' name='options' value='"+answersArr[m]+"' id='option'"+m+">"+answersArr[m]);
                 }
-            }else if(response.results[l].type === "boolean"){
-                for(m=0;m<2;m++){
-                    //defining variable and storing a question to the variable
-                    var answersArr = []; //Mira command
-                    //storing correct answer into answersArr
-                    var correctAns = response.results[l].correct_answer; //Mira command
-                    answersArr.push(correctAns); //Mira command
-                    //looping through the answers and stroing into "answersArr"
-                        for(j=0; j<response.results[l].incorrect_answers.length; j++){ //Mira command
-                        var option = response.results[l].incorrect_answers[j]; //Mira command
-                        if (option != undefined) { //Mira command
-                            answersArr.push(option);  //Mira command                   
-                            } 
-                        }
-//FIXX THIS  >>>>>> //answersArr.sort(() => Math.random()-0.5);
-                    $("#btn-col-"+l).append("<label class='btn btn-primary' id='btn-option-"+l+m+"'>");
-                    $("#btn-option-"+l+m).append("<input type='radio' name='options' value='"+answersArr[m]+"' id='option'"+m+">"+answersArr[m]);
-                } 
-            }
             $("#card-question"+l).append("<div class='back' id='card-back"+l+"'>");
             $("#card-back"+l).append("<div class='card-body' id='card-body-back"+l+"'>");
             $("#card-back"+l).append("<h3 class='card-title text-center' id='card-title-back"+l+"'>Question "+(l+1)+"<hr>");
@@ -135,6 +110,7 @@ function triviaDB (){
             $("#card-back"+l).append("<h4>"+response.results[l].correct_answer);
             flipcard();                 
         }
+
     });       
 }
 

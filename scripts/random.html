@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hola</h1>
+</body>
+<script>
+
+
+var arr = ["manzana", "pera", "uva", "limon", "mango"];
+arr = shuffle(arr);
+console.log(arr);
+
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // Mientras queden elementos a mezclar...
+  while (0 !== currentIndex) {
+
+    // Seleccionar un elemento sin mezclar...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // E intercambiarlo con el elemento actual
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+</script>
+</html>
